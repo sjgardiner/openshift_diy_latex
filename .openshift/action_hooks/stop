@@ -2,9 +2,9 @@
 source $OPENSHIFT_CARTRIDGE_SDK_BASH
 
 # The logic to stop your application should be put in this script.
-if [ -z "$(ps -ef | grep app | grep -v grep)" ]
+if [ -z "$(ps -ef | grep app.py | grep -v grep)" ]
 then
     echo "Application is already stopped"
 else
-    kill `ps -ef | grep app | grep -v grep | awk '{ print $2 }'` > /dev/null 2>&1
+    kill `ps -ef | grep app.py | grep -v grep | awk '{ print $2 }'` > /dev/null 2>&1
 fi
