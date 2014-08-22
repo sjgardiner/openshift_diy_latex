@@ -15,9 +15,9 @@ PythonVersion="2.7.5" # If you change this version, please also update the
 
 # Python installer
 if [ -e $OPENSHIFT_DATA_DIR/Python/bin/python ]; then
-  client_result "Python interpreter already installed"
+  echo "Python interpreter already installed"
 else
-  client_result "Building Python interpreter" 
+  echo "Building Python interpreter" 
   cd $OPENSHIFT_DATA_DIR
   wget http://www.python.org/ftp/python/$PythonVersion/Python-$PythonVersion.tgz
   tar xvfz Python-$PythonVersion.tgz
@@ -25,31 +25,31 @@ else
   
   ./configure --enable-shared --prefix=$OPENSHIFT_DATA_DIR/Python
   make
-  client_result "Installing Python interpreter"
+  echo "Installing Python interpreter"
   make install
   cd ..
   mkdir lib
   cd Python-$PythonVersion
   cp libpython2.7.so.1.0 ../lib
-  client_result "In order for the Python interpreter to work, you need to run the following command: rhc set-env -a $OPENSHIFT_APP_NAME \$LD_LIBRARY_PATH="$OPENSHIFT_DATA_DIR"lib"
+  echo "In order for the Python interpreter to work, you need to run the following command: rhc set-env -a $OPENSHIFT_APP_NAME \$LD_LIBRARY_PATH="$OPENSHIFT_DATA_DIR"lib"
   cd ..
-  client_result "Cleaning up Python installation file"
+  echo "Cleaning up Python installation file"
   rm Python-$PythonVersion.tgz
-  client_result "Creating Python $PythonVersion virtual environment in the folder "$OPENSHIFT_DATA_DIR"virtenv"
+  echo "Creating Python $PythonVersion virtual environment in the folder "$OPENSHIFT_DATA_DIR"virtenv"
   virtualenv -p ./Python/bin/python --no-site-packages ./virtenv
-  client_result "Installing additional Python modules using pip"
+  echo "Installing additional Python modules using pip"
   source ./virtenv/bin/activate
   pip install tornado
   pip install futures # Add more modules here as needed
   deactivate
-  client_result "Finished installing Python interpreter"
+  echo "Finished installing Python interpreter"
 fi
 
 # TeXLive installer
 if [ -e $OPENSHIFT_DATA_DIR/TeXLive/bin/x86_64-linux/pdflatex ]; then
-  client_result "TeXLive already installed"
+  echo "TeXLive already installed"
 else
-  client_result "Installing TeXLive" 
+  echo "Installing TeXLive" 
   cd $OPENSHIFT_DATA_DIR
   wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz 
   tar xvfz install-tl-unx.tar.gz
@@ -59,14 +59,14 @@ else
   cp "$OPENSHIFT_REPO_DIR"texlive.profile .
   sed -i "s|\~\/|$HOME|g" ./texlive.profile
   ./install-tl --profile=./texlive.profile
-  client_result "Cleaning up TeXLive installation files"
+  echo "Cleaning up TeXLive installation files"
   cd ..
   rm -rf install-tl
-  client_result "Finished installing TeXLive"
+  echo "Finished installing TeXLive"
 fi
 
 # texcaller builder
-client_result "Building texcaller" 
+echo "Building texcaller" 
 cd "$OPENSHIFT_REPO_DIR"texcaller/python
 make clean
 make
@@ -75,4 +75,4 @@ rm -f $OPENSHIFT_DATA_DIR"lib"/texcaller.py
 cp _texcaller.so $OPENSHIFT_DATA_DIR"lib"
 cp texcaller.py $OPENSHIFT_DATA_DIR"lib"
 cd $OPENSHIFT_DATA_DIR
-client_result "Finished building texcaller"
+echo "Finished building texcaller"
