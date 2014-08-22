@@ -8,6 +8,12 @@ regex='TeXLive'
 if [[ ! $PATH =~ $regex ]]; then
   export PATH="$OPENSHIFT_DATA_DIR"TeXLive/bin/x86_64-linux:$PATH
 fi
+# Ensure that the LD_LIBRARY_PATH seen by our application includes
+# the location of our shared libraries created during the build process
+regex='app-root\/data\/lib'
+if [[ ! $LD_LIBRARY_PATH =~ $regex ]]; then
+  export LD_LIBRARY_PATH="$OPENSHIFT_DATA_DIR"lib:$LD_LIBRARY_PATH
+fi
 # Launch the application inside of our Python virtual environment
 source "$OPENSHIFT_DATA_DIR"virtenv/bin/activate
 nohup python -u "$OPENSHIFT_REPO_DIR"app.py |& /usr/bin/logshifter -tag diy &
