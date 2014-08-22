@@ -3,5 +3,5 @@
 # script. The application will work only if it binds to
 # $OPENSHIFT_DIY_IP:8080
 source "$OPENSHIFT_DATA_DIR"virtenv/bin/activate
-nohup Python/python -u $OPENSHIFT_REPO_DIR/diy/app.py |& /usr/bin/logshifter -tag diy &
+nohup python -u $OPENSHIFT_REPO_DIR/diy/app.py |& /usr/bin/logshifter -tag diy &
 deactivate
