@@ -338,6 +338,8 @@ void texcaller_convert(char **result, size_t *result_size, char **info, const ch
     *result = NULL;
     *result_size = 0;
     *info = NULL;
+    int DEBUG_int;
+    char *DEBUG_str;
     /* check arguments */
     if        (strcmp(source_format, "TeX") == 0 && strcmp(result_format, "DVI") == 0) {
         cmd = "tex";
@@ -399,8 +401,12 @@ void texcaller_convert(char **result, size_t *result_size, char **info, const ch
     }
     /* run command as often as necessary */
     for (runs = 1; runs <= max_runs; runs++) {
+        printf("Parent process ID: %d\n", getpid());
         pid_t pid;
         pid = fork();
+        printf("New process ID: %d\n", pid);
+        DEBUG_str = getenv("PATH");
+        printf("The current path I can see is: %s -- My process ID: %d\n", DEBUG_str, getpid());
         if (pid == -1) {
             *info = sprintf_alloc("Unable to fork child process: %s.",
                                   strerror(errno));
@@ -414,13 +420,12 @@ void texcaller_convert(char **result, size_t *result_size, char **info, const ch
             }
             /* prevent access to stdin, stdout and stderr */
             fclose(stdin);
-            puts("DEBUG!");
-            printf("My process ID: %d\n", getpid());
-            fclose(stdout);
-            puts("DEBUG! 2");
+            printf("DEBUG! My process ID: %d\n", getpid());
+            //fclose(stdout);
             fclose(stderr);
             /* execute command */
-            execlp(cmd,
+            printf("DEBUG2! My process ID: %d\n", getpid());
+            DEBUG_int = execlp(cmd,
                    cmd,
                    "-interaction=batchmode",
                    "-halt-on-error",
@@ -428,12 +433,18 @@ void texcaller_convert(char **result, size_t *result_size, char **info, const ch
                    "-no-shell-escape",
                    "texput.tex",
                    NULL);
+            if (DEBUG_int == -1) {
+                printf("errno = %d -- My process ID: %d\n", errno, getpid());
+                printf("Note that ENOENT = %d\n", ENOENT);
+            }
         }
         /* wait for child process */
         for (;;) {
             int status;
             pid_t wpid = waitpid(pid, &status, 0);
+            printf("DEBUG3! My process ID: %d\n", getpid());
             if (wpid == -1) {
+                printf("DEBUG4! [wpid == -1] My process ID: %d\n", getpid());
                 *info = sprintf_alloc("Unable to wait for child process: %s.",
                                       strerror(errno));
                 goto cleanup;
