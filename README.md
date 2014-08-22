@@ -1,9 +1,9 @@
 A LaTeX-powered document generator web application for OpenShift based
-on the [`diy` cartridge](http://openshift.github.io/documentation/oo_cartridge_guide.html#diy).
+on the [diy cartridge](http://openshift.github.io/documentation/oo_cartridge_guide.html#diy).
 
 ### Installation ###
 
-* Create a [Do-It-Yourself 0.1](https://openshift.redhat.com/app/console/application_type/cart!diy-0.1) cartridge on OpenShift without adding a source code git repository (yet). You will have to add the code from this repository later because the OpenShift web console will time out if we add it now.
+* Create a <a href="https://openshift.redhat.com/app/console/application_type/cart!diy-0.1" target="_blank">Do-It-Yourself 0.1</a> cartridge on OpenShift without adding a source code git repository (yet). You will have to add the code from this repository later because the OpenShift web console will time out if we add it now.
 
 * Clone the app's repository from OpenShift using the `git URL` given in the web console after creating your app.
 
