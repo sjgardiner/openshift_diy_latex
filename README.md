@@ -13,6 +13,10 @@ on the [diy cartridge](http://openshift.github.io/documentation/oo_cartridge_gui
 
  **cd** `App Name`
 
+ **git rm -r diy**
+
+ **git rm -r misc**
+
  **git remote add upstream -m master** https://github.com/sjgardiner/openshift_diy_latex.git
 
  **git pull -s recursive -X theirs upstream master**
