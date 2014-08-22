@@ -6,6 +6,7 @@ try:
     texcaller = imp.load_source('texcaller', os.path.join(
         os.environ['LD_LIBRARY_PATH'], 'texcaller.py'))
 except (IOError, KeyError):
+    print("WARNING: Using binary copy of the texcaller module from the repository. The behavior of texcaller might not agree with recent source code changes.")
     import texcaller
 
 #
