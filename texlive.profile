@@ -1,5 +1,9 @@
 # texlive.profile
 # Used for installing TeXLive using the install-tl script in batch mode
+# Note that all tildes (~) in this file will be replaced with the value
+# of $HOME during installation (TeXLive does not automatically do this
+# for some of these directories, so our installation script takes care
+# of it)
 selected_scheme scheme-custom
 TEXDIR ~/app-root/data/TeXLive
 TEXMFCONFIG ~/.texlive2014/texmf-config
