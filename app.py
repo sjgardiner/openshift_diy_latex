@@ -5,7 +5,7 @@ import imp
 try:
     texcaller = imp.load_source('texcaller', os.path.join(
         os.environ['LD_LIBRARY_PATH'], 'texcaller.py'))
-except IOError:
+except (IOError, KeyError):
     import texcaller
 
 #
