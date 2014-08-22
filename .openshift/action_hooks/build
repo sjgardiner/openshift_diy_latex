@@ -35,6 +35,7 @@ else
   echo "Cleaning up Python installation file"
   rm Python-$PythonVersion.tgz
   echo "Creating Python $PythonVersion virtual environment in the folder "$OPENSHIFT_DATA_DIR"virtenv"
+  export LD_LIBRARY_PATH="$OPENSHIFT_DATA_DIR"lib
   virtualenv -p ./Python/bin/python --no-site-packages ./virtenv
   echo "Installing additional Python modules using pip"
   source ./virtenv/bin/activate
