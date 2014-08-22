@@ -31,7 +31,6 @@ else
   mkdir lib
   cd Python-$PythonVersion
   cp libpython2.7.so.1.0 ../lib
-  echo "In order for the Python interpreter to work, you need to run the following command: rhc set-env -a $OPENSHIFT_APP_NAME \$LD_LIBRARY_PATH="$OPENSHIFT_DATA_DIR"lib"
   cd ..
   echo "Cleaning up Python installation file"
   rm Python-$PythonVersion.tgz
