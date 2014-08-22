@@ -414,7 +414,10 @@ void texcaller_convert(char **result, size_t *result_size, char **info, const ch
             }
             /* prevent access to stdin, stdout and stderr */
             fclose(stdin);
+            puts("DEBUG!");
+            printf("My process ID: %d\n", getpid());
             fclose(stdout);
+            puts("DEBUG! 2");
             fclose(stderr);
             /* execute command */
             execlp(cmd,

@@ -78,4 +78,6 @@ if __name__ == "__main__":
     except (KeyError, ValueError):
       port = 8080
 
+    print("\n===READY===\n")
+
     main(port, address)
