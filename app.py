@@ -66,18 +66,14 @@ def main(port, address):
 
 if __name__ == "__main__":
     try:
-      app_name = os.environ['OPENSHIFT_APP_NAME'].upper()
-    except KeyError:
-      app_name = "DIY"
-    try:
-      address = os.environ['OPENSHIFT_' + app_name + '_IP']
+      address = os.environ['OPENSHIFT_DIY_IP']
       if not address: # Test for empty string
         address = "127.0.0.1"
     except KeyError:
       address = "127.0.0.1"
 
     try:
-      port = int(os.environ['OPENSHIFT_' + app_name + '_PORT'])
+      port = int(os.environ['OPENSHIFT_DIY_PORT'])
     except (KeyError, ValueError):
       port = 8080
 
