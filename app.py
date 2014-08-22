@@ -37,20 +37,22 @@ class MainHandler(tornado.web.RequestHandler):
                    '<p><form action="/pdf">'
                    '<input type="submit" value="Generate PDF"></form></p>'
                    '</body></html>')
+        self.finish()
 
     def post(self):
         self.set_header("Content-Type", "text/plain")
         self.write("You wrote " + self.get_body_argument("message") + "\n")
         self.write("You also chose " + self.get_body_argument("problem_choice"))
+        self.finish()
 
 class PDFHandler(tornado.web.RequestHandler):
     def get(self):
         pdf, info = texcaller.convert(latex_doc, 'LaTeX', 'PDF', 5)
-        #self.set_header("Content-Type", "text/plain")
-        #self.write('PDF size:     %.1f KB' % (len(pdf) / 1024.0))
-        #self.write('PDF content:  %s ... %s' % (pdf[:5], pdf[-6:]))
         self.set_header("Content-Type", "application/pdf")
+        self.set_header("Content-Disposition",
+            "attachment; filename=document.pdf")
         self.write(pdf)
+        self.finish()
 
 application = tornado.web.Application([
     (r"/", MainHandler),
