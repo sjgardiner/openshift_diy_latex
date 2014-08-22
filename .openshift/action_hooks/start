@@ -2,6 +2,13 @@
 # The logic to start up your application should be put in this
 # script. The application will work only if it binds to
 # $OPENSHIFT_DIY_IP:8080
+# Ensure that the PATH seen by our application includes the location
+# of the TEXLive executables
+regex='TeXLive'
+if [[ ! $PATH =~ $regex ]]; then
+  export PATH="$OPENSHIFT_DATA_DIR"TeXLive/bin/x86_64-linux:$PATH
+fi
+# Launch the application inside of our Python virtual environment
 source "$OPENSHIFT_DATA_DIR"virtenv/bin/activate
 nohup python -u "$OPENSHIFT_REPO_DIR"app.py |& /usr/bin/logshifter -tag diy &
 deactivate
