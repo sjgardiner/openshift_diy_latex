@@ -1,17 +1,12 @@
 #!/usr/bin/python
 import os
-import texcaller # Python interface for compiling LaTeX documents
+import imp
 
 try:
-    virtenv = os.path.join(os.environ['OPENSHIFT_REPO_DIR'], 'misc/virtenv/')
-    virtualenv = os.path.join(virtenv, 'bin/activate_this.py')
-    try:
-        execfile(virtualenv, dict(__file__=virtualenv))
-    except IOError:
-        pass
-except KeyError: # The environment variable OPENSHIFT_PYTHON_DIR
-    pass         # is undefined, so assume that we are running somewhere other
-                 # than on OpenShift
+    texcaller = imp.load_source('texcaller', os.path.join(
+        os.environ['LD_LIBRARY_PATH'], 'texcaller.py'))
+except IOError:
+    import texcaller
 
 #
 # IMPORTANT: Put any additional includes below this line.  If placed above this
