@@ -1,10 +1,12 @@
-The texcaller code is copyright (C) 2010, 2011 by Volker Grabsch. It is
-available in its original form at https://vog.github.io/texcaller/index.html
+Copyright (c) 2014 Steven Gardiner
 
-This distribution includes slightly modified versions of the C and Python
-components of texcaller for use with an OpenShift web application. The
-modifications made to texcaller in this distribution are copyright (C) 2014 by
-Steven Gardiner.
+The texcaller code is copyright (c) 2010, 2011 Volker Grabsch. It is
+available in its original form at https://vog.github.io/texcaller/
+under an MIT license.
+
+This web application makes use of slightly modified versions of the
+C and Python components of texcaller. The modifications made to texcaller
+are copyright (c) 2014 Steven Gardiner.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in

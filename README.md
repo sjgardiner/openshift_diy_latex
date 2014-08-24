@@ -1,5 +1,10 @@
-A LaTeX-powered document generator web application for OpenShift based
-on the [diy cartridge](http://openshift.github.io/documentation/oo_cartridge_guide.html#diy).
+A LaTeX-powered document generator web application for
+[OpenShift](http://openshift.com) based on the
+[diy cartridge](http://openshift.github.io/documentation/oo_cartridge_guide.html#diy).
+
+### License ###
+This software is released under the terms of the MIT license. For details,
+please see the full text of the <a href="https://github.com/sjgardiner/openshift_diy_latex/blob/master/LICENSE.txt" target="_blank">license</a>.
 
 ### Installation ###
 
